@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison Bellier — Boutique Hotel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #F7F3ED;
+    --warm-white: #FDFAF6;
+    --dark: #1A1714;
+    --mid: #4A4540;
+    --muted: #8C8580;
+    --gold: #B89B6A;
+    --gold-light: #D4BC92;
+    --border: rgba(184,155,106,0.25);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--dark); font-weight: 300; overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: rgba(247,243,237,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; letter-spacing: 0.12em; color: var(--dark); text-decoration: none; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.6rem 1.6rem; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; transition: all 0.25s; }
+  .nav-cta:hover { background: var(--gold); color: var(--warm-white); }
+
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 5rem; }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 6rem 4rem 6rem 6rem; }
+  .hero-eyebrow { font-size: 0.63rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 5vw, 5rem); font-weight: 300; line-height: 1.05; color: var(--dark); opacity: 0; animation: fadeUp 0.9s 0.35s forwards; }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-sub { margin-top: 2rem; font-size: 0.95rem; line-height: 1.85; color: var(--muted); max-width: 36ch; opacity: 0; animation: fadeUp 0.9s 0.5s forwards; }
+  .hero-divider { width: 48px; height: 1px; background: var(--gold); margin: 2.5rem 0; opacity: 0; animation: fadeUp 0.8s 0.65s forwards; }
+  .hero-stats { display: flex; gap: 3rem; opacity: 0; animation: fadeUp 0.8s 0.75s forwards; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: var(--dark); display: block; }
+  .stat-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .hero-right { position: relative; overflow: hidden; opacity: 0; animation: fadeIn 1.2s 0.4s forwards; }
+  .hero-img-grid { display: grid; grid-template-rows: 60% 40%; height: 100%; }
+  .hero-img-main { background: url('https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=900&q=80') center/cover; }
+  .hero-img-row { display: grid; grid-template-columns: 1fr 1fr; }
+  .hero-img-sm1 { background: url('https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&q=80') center/cover; }
+  .hero-img-sm2 { background: url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=500&q=80') center/cover; }
+
+  .intro-strip { background: var(--dark); padding: 5rem 6rem; display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; gap: 3rem; align-items: center; }
+  .strip-item { text-align: center; }
+  .strip-divider { background: rgba(255,255,255,0.08); }
+  .strip-icon { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold-light); display: block; margin-bottom: 0.75rem; }
+  .strip-title { font-size: 0.63rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-light); display: block; margin-bottom: 0.5rem; }
+  .strip-desc { font-size: 0.88rem; color: rgba(255,255,255,0.45); line-height: 1.7; }
+
+  .rooms { padding: 7rem 6rem; background: var(--warm-white); }
+  .section-label { font-size: 0.63rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3.5vw, 3.2rem); font-weight: 300; color: var(--dark); line-height: 1.15; max-width: 24ch; }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .rooms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 4rem; }
+  .room-card { background: var(--cream); border: 1px solid var(--border); overflow: hidden; transition: transform 0.3s; }
+  .room-card:hover { transform: translateY(-4px); }
+  .room-img { height: 240px; background-size: cover; background-position: center; position: relative; }
+  .room-badge { position: absolute; top: 1rem; right: 1rem; background: var(--dark); color: var(--gold-light); font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.35rem 0.75rem; }
+  .room-body { padding: 1.75rem; }
+  .room-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 0.5rem; }
+  .room-desc { font-size: 0.84rem; line-height: 1.7; color: var(--muted); margin-bottom: 1.25rem; }
+  .room-footer { display: flex; align-items: baseline; justify-content: space-between; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+  .room-price { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; }
+  .room-price span { font-family: 'Jost', sans-serif; font-size: 0.68rem; letter-spacing: 0.12em; color: var(--muted); margin-left: 0.25rem; }
+  .room-link { font-size: 0.63rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: opacity 0.2s; }
+  .room-link:hover { opacity: 0.65; }
+
+  .booking { padding: 7rem 6rem; background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+  .booking-left { position: sticky; top: 7rem; }
+  .booking-text { margin-top: 1.5rem; font-size: 0.92rem; line-height: 1.85; color: var(--muted); max-width: 38ch; }
+  .booking-perks { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 0.85rem; }
+  .booking-perks li { font-size: 0.78rem; letter-spacing: 0.04em; color: var(--mid); display: flex; align-items: center; gap: 0.75rem; }
+  .booking-perks li::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--gold); flex-shrink: 0; }
+
+  .form-card { background: var(--warm-white); border: 1px solid var(--border); padding: 3rem; }
+  .form-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  .form-group { margin-bottom: 1.5rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+  label { display: block; font-size: 0.63rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+  input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select, textarea {
+    width: 100%; padding: 0.85rem 1rem; background: var(--cream); border: 1px solid var(--border);
+    color: var(--dark); font-family: 'Jost', sans-serif; font-size: 0.88rem; font-weight: 300; outline: none;
+    transition: border-color 0.2s; -webkit-appearance: none; appearance: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C8580' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; background-color: var(--cream); padding-right: 2.5rem; cursor: pointer; }
+  textarea { resize: vertical; min-height: 100px; }
+  .form-preferences { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: 0.5rem; }
+  .pref-check { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+  .pref-check input[type="checkbox"] { width: 16px; height: 16px; padding: 0; flex-shrink: 0; accent-color: var(--gold); cursor: pointer; }
+  .pref-check span { font-size: 0.78rem; color: var(--mid); text-transform: none; letter-spacing: 0; }
+  .submit-btn { width: 100%; padding: 1.1rem; background: var(--dark); color: var(--gold-light); border: none; font-family: 'Jost', sans-serif; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer; transition: all 0.25s; margin-top: 2rem; }
+  .submit-btn:hover { background: var(--gold); color: var(--dark); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .form-note { font-size: 0.7rem; color: var(--muted); text-align: center; margin-top: 1rem; line-height: 1.6; }
+
+  .success-msg { display: none; text-align: center; padding: 4rem 2rem; }
+  .success-icon { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; color: var(--gold); display: block; margin-bottom: 1.25rem; }
+  .success-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 1rem; }
+  .success-text { font-size: 0.9rem; color: var(--muted); line-height: 1.85; max-width: 34ch; margin: 0 auto; }
+
+  .quote-section { background: var(--dark); padding: 7rem 6rem; text-align: center; position: relative; overflow: hidden; }
+  .quote-section::before { content: '\201C'; font-family: 'Cormorant Garamond', serif; font-size: 18rem; color: rgba(184,155,106,0.06); position: absolute; top: -3rem; left: 50%; transform: translateX(-50%); line-height: 1; pointer-events: none; }
+  .quote-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; font-style: italic; color: var(--warm-white); line-height: 1.4; max-width: 28ch; margin: 0 auto 2rem; position: relative; z-index: 1; }
+  .quote-author { font-size: 0.63rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-light); position: relative; z-index: 1; }
+
+  footer { background: var(--dark); padding: 3rem 6rem; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--gold-light); letter-spacing: 0.12em; }
+  .footer-text { font-size: 0.72rem; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; }
+
+  .toast { position: fixed; bottom: 2rem; right: 2rem; background: #7A2020; color: #FDE; padding: 1rem 1.5rem; font-size: 0.84rem; z-index: 999; display: none; max-width: 320px; line-height: 1.6; border-left: 3px solid #C44; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (max-width: 920px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 55vw; min-height: 280px; }
+    .hero-left { padding: 5rem 2rem 3rem; }
+    .intro-strip { grid-template-columns: 1fr; padding: 4rem 2rem; }
+    .strip-divider { display: none; }
+    .rooms { padding: 5rem 2rem; }
+    .rooms-grid { grid-template-columns: 1fr; }
+    .booking { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
+    .booking-left { position: static; }
+    .form-card { padding: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .quote-section { padding: 5rem 2rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2.5rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Maison Bellier</a>
+  <ul class="nav-links">
+    <li><a href="#rooms">Rooms</a></li>
+    <li><a href="#booking">Reserve</a></li>
+    <li><a href="#">Experiences</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <a href="#booking" class="nav-cta">Book a Stay</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Paris, 8th Arrondissement · Est. 1882</p>
+    <h1 class="hero-title">Where <em>time</em><br>slows to a<br>gentle grace</h1>
+    <p class="hero-sub">A reimagined 19th-century mansion offering twelve unique rooms, personalised service, and a quiet sanctuary at the heart of Paris.</p>
+    <div class="hero-divider"></div>
+    <div class="hero-stats">
+      <div><span class="stat-num">12</span><span class="stat-label">Curated Rooms</span></div>
+      <div><span class="stat-num">1882</span><span class="stat-label">Est.</span></div>
+      <div><span class="stat-num">5★</span><span class="stat-label">Boutique</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-grid">
+      <div class="hero-img-main"></div>
+      <div class="hero-img-row">
+        <div class="hero-img-sm1"></div>
+        <div class="hero-img-sm2"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="intro-strip">
+  <div class="strip-item">
+    <span class="strip-icon">⋄</span>
+    <span class="strip-title">Personalised Arrivals</span>
+    <p class="strip-desc">Each guest is welcomed with bespoke arrangements — from preferred pillow types to in-room florals selected that morning.</p>
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <span class="strip-icon">⋄</span>
+    <span class="strip-title">Concierge 24/7</span>
+    <p class="strip-desc">Reservations, tours, late checkouts — our team anticipates every need and handles it with quiet efficiency.</p>
+  </div>
+  <div class="strip-divider"></div>
+  <div class="strip-item">
+    <span class="strip-icon">⋄</span>
+    <span class="strip-title">Curated Experiences</span>
+    <p class="strip-desc">Private gallery visits, chef dinners, hidden neighbourhood walks — designed around your own rhythm.</p>
+  </div>
+</div>
+
+<section class="rooms" id="rooms">
+  <span class="section-label">Accommodations</span>
+  <h2 class="section-title">Twelve rooms, each a <em>world unto itself</em></h2>
+  <div class="rooms-grid">
+    <div class="room-card">
+      <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=700&q=80')">
+        <span class="room-badge">Courtyard View</span>
+      </div>
+      <div class="room-body">
+        <h3 class="room-name">La Chambre Dorée</h3>
+        <p class="room-desc">Warm oak panelling, a velvet chaise, and morning light that falls just so across the Persian rug.</p>
+        <div class="room-footer">
+          <div class="room-price">€320<span>/ night</span></div>
+          <a href="#booking" class="room-link">Reserve →</a>
+        </div>
+      </div>
+    </div>
+    <div class="room-card">
+      <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1590490360182-c33d57733427?w=700&q=80')">
+        <span class="room-badge">Garden Suite</span>
+      </div>
+      <div class="room-body">
+        <h3 class="room-name">La Suite Jardin</h3>
+        <p class="room-desc">Private terrace overlooking the walled garden. A marble bath, and champagne at dusk included.</p>
+        <div class="room-footer">
+          <div class="room-price">€520<span>/ night</span></div>
+          <a href="#booking" class="room-link">Reserve →</a>
+        </div>
+      </div>
+    </div>
+    <div class="room-card">
+      <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=700&q=80')">
+        <span class="room-badge">Top Floor</span>
+      </div>
+      <div class="room-body">
+        <h3 class="room-name">L'Appartement Blanc</h3>
+        <p class="room-desc">Rooftop views of Haussmann rooftops, a kitchenette, and the quiet of being above the city.</p>
+        <div class="room-footer">
+          <div class="room-price">€680<span>/ night</span></div>
+          <a href="#booking" class="room-link">Reserve →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="booking" id="booking">
+  <div class="booking-left">
+    <span class="section-label">Reservations</span>
+    <h2 class="section-title">Your stay, <em>precisely arranged</em></h2>
+    <p class="booking-text">We review each reservation personally. Your preferences become our brief. Confirmation arrives within the hour — usually sooner.</p>
+    <ul class="booking-perks">
+      <li>No booking fees, ever</li>
+      <li>Free cancellation up to 48 hours prior</li>
+      <li>Personalised welcome prepared in advance</li>
+      <li>Concierge contact from the moment you book</li>
+      <li>Late checkout complimentary when availability allows</li>
+    </ul>
+  </div>
+
+  <div>
+    <div class="form-card" id="form-card">
+      <h3 class="form-title">Request a Reservation</h3>
+      <form id="booking-form" novalidate>
+
+        <div class="form-row">
+          <div>
+            <label for="guestName">Full Name *</label>
+            <input type="text" id="guestName" placeholder="Your name" required>
+          </div>
+          <div>
+            <label for="guestEmail">Email *</label>
+            <input type="email" id="guestEmail" placeholder="your@email.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label for="guestPhone">Phone</label>
+            <input type="tel" id="guestPhone" placeholder="+33 1 00 00 00 00">
+          </div>
+          <div>
+            <label for="roomNumber">Room *</label>
+            <select id="roomNumber" required>
+              <option value="" disabled selected>Select a room</option>
+              <option value="101 — La Chambre Dorée (€320/night)">101 — La Chambre Dorée · €320</option>
+              <option value="204 — La Suite Jardin (€520/night)">204 — La Suite Jardin · €520</option>
+              <option value="312 — L'Appartement Blanc (€680/night)">312 — L'Appartement Blanc · €680</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label for="checkIn">Check-in *</label>
+            <input type="date" id="checkIn" required>
+          </div>
+          <div>
+            <label for="checkOut">Check-out *</label>
+            <input type="date" id="checkOut" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Preferences</label>
+          <div class="form-preferences">
+            <label class="pref-check"><input type="checkbox" class="pref" value="hypoallergenic pillows"><span>Hypoallergenic pillows</span></label>
+            <label class="pref-check"><input type="checkbox" class="pref" value="extra towels"><span>Extra towels</span></label>
+            <label class="pref-check"><input type="checkbox" class="pref" value="welcome champagne"><span>Welcome champagne</span></label>
+            <label class="pref-check"><input type="checkbox" class="pref" value="late breakfast (10 AM)"><span>Late breakfast (10 AM)</span></label>
+            <label class="pref-check"><input type="checkbox" class="pref" value="quiet room"><span>Quiet room preferred</span></label>
+            <label class="pref-check"><input type="checkbox" class="pref" value="high floor"><span>High floor</span></label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="specialRequests">Special Requests</label>
+          <textarea id="specialRequests" placeholder="Anniversary, dietary needs, early arrival time…"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn">Request Reservation</button>
+        <p class="form-note">We confirm by email within 60 minutes.<br>No payment required at this stage.</p>
+      </form>
+    </div>
+
+    <div class="success-msg" id="success-msg">
+      <span class="success-icon">✦</span>
+      <h3 class="success-title">Reservation Received</h3>
+      <p class="success-text">Thank you. We're reviewing your request and will write to you shortly with full confirmation and your personal welcome.</p>
+    </div>
+  </div>
+</section>
+
+<section class="quote-section">
+  <blockquote class="quote-text">"A place where the city noise fades and every detail speaks of someone who truly cared."</blockquote>
+  <p class="quote-author">— Condé Nast Traveller, Best Boutique Hotels 2024</p>
+</section>
+
+<footer>
+  <span class="footer-logo">Maison Bellier</span>
+  <p class="footer-text">14 Rue du Faubourg Saint-Honoré, Paris 75008 &nbsp;·&nbsp; +33 1 40 00 00 00</p>
+  <p class="footer-text">© 2025 Maison Bellier. All rights reserved.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── CONFIG: Replace with your n8n webhook URL ──
+  const N8N_WEBHOOK_URL = 'https://ai.mnu.kz/webhook/hotel-booking';
+
+  // Set minimum dates
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('checkIn').min = today;
+  document.getElementById('checkOut').min = today;
+
+  document.getElementById('checkIn').addEventListener('change', function() {
+    const d = new Date(this.value);
+    d.setDate(d.getDate() + 1);
+    document.getElementById('checkOut').min = d.toISOString().split('T')[0];
+    if (document.getElementById('checkOut').value && document.getElementById('checkOut').value <= this.value) {
+      document.getElementById('checkOut').value = '';
+    }
+  });
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.display = 'block';
+    setTimeout(() => { t.style.display = 'none'; }, 5000);
+  }
+
+  document.getElementById('booking-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+
+    const name = document.getElementById('guestName').value.trim();
+    const email = document.getElementById('guestEmail').value.trim();
+    const room = document.getElementById('roomNumber').value;
+    const checkIn = document.getElementById('checkIn').value;
+    const checkOut = document.getElementById('checkOut').value;
+
+    if (!name || !email || !room || !checkIn || !checkOut) {
+      showToast('Please fill in all required fields (marked with *).');
+      return;
+    }
+    if (checkOut <= checkIn) {
+      showToast('Check-out date must be after check-in date.');
+      return;
+    }
+
+    const prefs = [...document.querySelectorAll('.pref:checked')].map(c => c.value).join(', ');
+
+    const payload = {
+      guestName: name,
+      guestEmail: email,
+      guestPhone: document.getElementById('guestPhone').value.trim(),
+      roomNumber: room,
+      checkIn: checkIn,
+      checkOut: checkOut,
+      preferences: prefs || 'None specified',
+      specialRequests: document.getElementById('specialRequests').value.trim() || 'None',
+      submittedAt: new Date().toISOString(),
+      source: 'website-landing-page'
+    };
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      const res = await fetch(N8N_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok || res.status === 200) {
+        showSuccess();
+      } else {
+        throw new Error('HTTP ' + res.status);
+      }
+    } catch (err) {
+      console.warn('Webhook error:', err.message);
+      // For demo: still show success (webhook URL is placeholder)
+      // In production: uncomment the error handling below
+      showToast('Something went wrong. Please call us directly: +33 1 40 00 00 00');
+      btn.disabled = false;
+      btn.textContent = 'Request Reservation';
+    }
+  });
+
+  function showSuccess() {
+    document.getElementById('form-card').style.display = 'none';
+    const s = document.getElementById('success-msg');
+    s.style.display = 'block';
+    s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+</body>
+</html>
