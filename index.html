@@ -138,6 +138,23 @@
   .modal-small { font-size: 0.72rem; color: var(--muted); margin-top: 1.5rem; line-height: 1.7; }
   .modal-small a { color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold); }
 
+  /* Requests & complaints section */
+  .requests-section { padding: 7rem 6rem; background: var(--warm-white); border-top: 1px solid var(--border); }
+  .requests-header { text-align: center; max-width: 640px; margin: 0 auto 4rem; }
+  .requests-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.25rem; }
+  .requests-title em { font-style: italic; color: var(--gold); }
+  .requests-text { font-size: 0.95rem; line-height: 1.85; color: var(--muted); max-width: 52ch; margin: 0 auto; }
+  .requests-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
+  .request-card { background: var(--cream); border: 1px solid var(--border); padding: 2.5rem 2rem; text-align: left; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: all 0.3s; position: relative; }
+  .request-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .request-card-icon { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--gold); display: block; margin-bottom: 1.25rem; line-height: 1; }
+  .request-card-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.75rem; }
+  .request-card-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 0.75rem; color: var(--dark); }
+  .request-card-desc { font-size: 0.85rem; line-height: 1.7; color: var(--muted); margin-bottom: 1.5rem; flex-grow: 1; }
+  .request-card-cta { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dark); padding-top: 1rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .request-card-cta span { transition: transform 0.25s; }
+  .request-card:hover .request-card-cta span { transform: translateX(4px); color: var(--gold); }
+
   /* Review section */
   .review-section { padding: 7rem 6rem; background: var(--warm-white); text-align: center; border-top: 1px solid var(--border); }
   .review-eyebrow { font-size: 0.63rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1.25rem; }
@@ -167,6 +184,8 @@
     .form-card { padding: 2rem; }
     .form-row { grid-template-columns: 1fr; }
     .quote-section { padding: 5rem 2rem; }
+    .requests-section { padding: 5rem 2rem; }
+    .requests-grid { grid-template-columns: 1fr; gap: 1rem; }
     .review-section { padding: 5rem 2rem; }
     .modal-content { padding: 2.5rem 1.75rem 2rem; }
     footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2.5rem 2rem; }
@@ -180,6 +199,7 @@
   <ul class="nav-links">
     <li><a href="#rooms">Rooms</a></li>
     <li><a href="#booking">Reserve</a></li>
+    <li><a href="#requests">Requests</a></li>
     <li><a href="#review">Share Your Stay</a></li>
     <li><a href="#">Contact</a></li>
   </ul>
@@ -362,6 +382,40 @@
   </div>
 </section>
 
+<section class="requests-section" id="requests">
+  <div class="requests-header">
+    <span class="section-label">During Your Stay</span>
+    <h2 class="requests-title">Requests, <em>handled quietly</em></h2>
+    <p class="requests-text">Whether you'd like an extra hour in your room, a different pillow, or simply want to tell us something didn't feel right — our team receives your message immediately and responds within minutes.</p>
+  </div>
+
+  <div class="requests-grid">
+    <a href="#" class="request-card" id="req-late-checkout" target="_blank" rel="noopener">
+      <span class="request-card-icon">⋄</span>
+      <span class="request-card-label">Extend your stay</span>
+      <h3 class="request-card-name">Late Checkout</h3>
+      <p class="request-card-desc">Request an extra hour (or a few) past the standard 11 AM checkout. Complimentary when availability allows, otherwise a modest hourly fee.</p>
+      <div class="request-card-cta">Request now <span>→</span></div>
+    </a>
+
+    <a href="#" class="request-card" id="req-special" target="_blank" rel="noopener">
+      <span class="request-card-icon">✦</span>
+      <span class="request-card-label">Anything extra</span>
+      <h3 class="request-card-name">Special Request</h3>
+      <p class="request-card-desc">Extra towels, a reservation somewhere memorable, flowers for an occasion, a quieter room — tell us what would make the stay yours.</p>
+      <div class="request-card-cta">Send a request <span>→</span></div>
+    </a>
+
+    <a href="#" class="request-card" id="req-complaint" target="_blank" rel="noopener">
+      <span class="request-card-icon">◇</span>
+      <span class="request-card-label">Something off?</span>
+      <h3 class="request-card-name">Report an Issue</h3>
+      <p class="request-card-desc">If something fell short — the room, the service, anything — please let us know now so we can make it right before you leave.</p>
+      <div class="request-card-cta">Tell us <span>→</span></div>
+    </a>
+  </div>
+</section>
+
 <section class="quote-section">
   <blockquote class="quote-text">"A place where the city noise fades and every detail speaks of someone who truly cared."</blockquote>
   <p class="quote-author">— Condé Nast Traveller, Best Boutique Hotels 2024</p>
@@ -403,8 +457,19 @@
   const N8N_WEBHOOK_URL = 'https://ai.mnu.kz/webhook/hotel-booking';
   const TYPEFORM_URL    = 'https://YOUR-TYPEFORM-URL.typeform.com/to/XXXXXX'; // ← paste your Typeform link here
 
+  // Request Typeforms — можно использовать ОДИН общий Typeform с полем "Request type",
+  // либо 3 отдельных. Если используете один — вставьте одну и ту же ссылку во все три:
+  const TYPEFORM_LATE_CHECKOUT = 'https://form.typeform.com/to/iJuTNHgb';
+  const TYPEFORM_SPECIAL       = 'https://form.typeform.com/to/iJuTNHgb';
+  const TYPEFORM_COMPLAINT     = 'https://form.typeform.com/to/iJuTNHgb';
+
   // Set Typeform link on the review button
   document.getElementById('review-btn').href = TYPEFORM_URL;
+
+  // Set Typeform links on request cards
+  document.getElementById('req-late-checkout').href = TYPEFORM_LATE_CHECKOUT;
+  document.getElementById('req-special').href       = TYPEFORM_SPECIAL;
+  document.getElementById('req-complaint').href     = TYPEFORM_COMPLAINT;
 
   // Minimum dates for check-in / check-out
   const today = new Date().toISOString().split('T')[0];
